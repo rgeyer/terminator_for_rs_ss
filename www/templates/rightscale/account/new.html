@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block title %}New RightScale Account{% endblock %}
+{% block body %}
+<br/>
+<div class="panel panel-default">
+  <div class="panel-heading">Add a new RightScale account</div>
+  <div class="panel-body">
+    <form role="form" method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label>Account Id</label>
+        <input type="text" name="account_id" class="form-control"></input>
+      </div>
+      <div class="form-group">
+        <label>Refresh Token</label>
+        <input type="text" name="refresh_token" class="form-control"></input>
+        <p>An OAuth refresh token see <a href="http://docs.rightscale.com/api/api_1.5_examples/oauth.html" target="_blank">here</a> for details</p>
+      </div>
+      <h4>API Hosts</h4>
+      <div class="form-group input-group">
+        <input type="text" name="ss_uri" class="form-control" placeholder="SelfService API Host"></input>
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Production Shards <span class="caret"></span></button>
+          <ul class="dropdown-menu dropdown-menu-right">
+            <li><a href="ss_uri" class="sharduri">https://selfservice-3.rightscale.com</a></li>
+            <li><a href="ss_uri" class="sharduri">https://selfservice-4.rightscale.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="form-group input-group">
+        <input type="text" name="cm_uri" class="form-control" placeholder="Cloud Management API Host"></input>
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Production Shards <span class="caret"></span></button>
+          <ul class="dropdown-menu dropdown-menu-right">
+            <li><a href="cm_uri" class="sharduri">https://us-3.rightscale.com</a></li>
+            <li><a href="cm_uri" class="sharduri">https://us-4.rightscale.com</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-default">Add</button>
+    </form>
+  </div>
+</div>
+
+<p>{{accounts}}</p>
+
+<script>
+$('.sharduri').click(function(evt) {
+  evt.preventDefault();
+  var shard = $(evt.currentTarget).text();
+  var input_name = $(evt.currentTarget).attr('href');
+  var selector = 'input:text[name='+input_name+']';
+  var input = $(selector);
+  input.val(shard);
+});
+</script>
+{% endblock %}

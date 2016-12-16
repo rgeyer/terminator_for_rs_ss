@@ -1,0 +1,10 @@
+skynetweb:
+  build: .
+  command: /code/dockerfiles/run.sh
+  environment:
+    - VIRTUAL_HOST=devskynet.cse.rightscale-services.com
+    - WSTUNNEL_TOKEN=terminator-for-rs-ss-dev
+  volumes:
+    - .:/code
+  expose:
+    - 80

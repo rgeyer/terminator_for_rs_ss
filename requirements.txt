@@ -1,0 +1,6 @@
+Django>=1.8
+python-social-auth
+-e git+https://github.com/brantai/python-rightscale.git#egg=Package
+djangorestframework
+markdown
+django-filter
